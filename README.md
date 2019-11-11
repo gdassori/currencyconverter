@@ -1,45 +1,31 @@
 # Micro Currency Converter
 An easy to use currency converter, uses ECB data as source, able to convert from\to EUR.
 
-####Installation
+#### Installation
 
 Requires docker:
 
-With Docker, from Dockerhub
-```
-docker pull gdassori/currencyconverter:latest
-docker run gdassori/currencyconverter
+Available on DockerHub:
+```bash
+docker pull gdassori/mcc:latest
+docker run -t -p=8080:8080 gdassori/mcc
 ```
 
-Without Docker, in a dedicated Python virtual environment
+#### Usage example
+
+- Method: `GET`
+- Endpoint: `/convert`
+- Arguments:
+    - `amount`: 10
+    - `src_currency`: EUR
+    - `dest_currency`: USD
+    - `reference_date`: 2019-11-08
+
+With curl
 
 ```bash
-git clone https://github.com/gdassori/currencyconverter.git
-cd currencyconverter
-virtualenv -p python3.6 venv
-. venv/bin/activate
-pip install -r requirements.txt
-python -m mcc.app
-```
-
-####Run tests
-```bash
-. venv/bin/activate
-bash coverage.sh
-```
-
-####Usage example
-
-Arguments
-- amount: float
-- src_currency: str
-- dest_currency: str
-- reference_date: YYYY-MM-DD
-
-An example call with curl:
-
-```bash
-curl http://localhost:8080/convert?amount=10&dest_currency=USD&src_currency=EUR&reference_date=2019-11-08
+curl "http://localhost:8080/convert?amount=10&\
+&dest_currency=USD&src_currency=EUR&reference_date=2019-11-08"
 ```
 
 would return:

@@ -9,10 +9,6 @@ class PricesService(metaclass=abc.ABCMeta):
         pass  # pragma: no cover
 
     @abc.abstractmethod
-    def is_date_indexed(self, reference_date: str) -> bool:
-        pass  # pragma: no cover
-
-    @abc.abstractmethod
     def get_quotes_for_date(self, reference_date: str) -> typing.Dict:
         pass  # pragma: no cover
 

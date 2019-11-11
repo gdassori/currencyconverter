@@ -2,6 +2,8 @@ import typing
 import decimal
 import xmltodict
 import aiohttp
+from aiohttp import ClientConnectorError
+from aiohttp.web_exceptions import HTTPError
 
 from src import exceptions
 from src.abstracts import PricesService
@@ -14,21 +16,30 @@ class PricesServiceImpl(PricesService):
     def __init__(self, data_url=DATA_URL):
         self._data = {}
         self._data_url = data_url
-        self._supported_currencies = {'eur'}
+        self._supported_currencies = set()
         self._range = [None, None]
 
     def get_quotes_for_date(self, reference_date: str) -> typing.Dict:
         if not self._data:
             raise exceptions.DataUnavailableException('Data not available')
-        return self._data[reference_date]
+        try:
+            return self._data[reference_date]
+        except KeyError:
+            raise exceptions.ReferenceDateOutOfRange(
+                'Date must a working day be between %s and %s' % self.get_range()
+            )
 
     def get_range(self):
         return tuple(self._range)
 
     async def load(self):
-        async with aiohttp.ClientSession() as session:
-            response = await session.get(self._data_url, raise_for_status=True)
-            data = await response.text()
+        try:
+            async with aiohttp.ClientSession() as session:
+                response = await session.get(self._data_url, raise_for_status=True)
+                data = await response.text()
+        except (HTTPError, ConnectionRefusedError, ClientConnectorError):
+            raise exceptions.DataUnavailableException
+        self._supported_currencies.add('eur')
         _data = xmltodict.parse(data)['gesmes:Envelope']['Cube']['Cube']
         for x in _data:
             res = {}
@@ -41,10 +52,3 @@ class PricesServiceImpl(PricesService):
 
     def is_currency_supported(self, currency: str) -> bool:
         return currency.lower() in self._supported_currencies
-
-    def is_date_indexed(self, date: str):
-        try:
-            quotes = self.get_quotes_for_date(date)
-            return bool(quotes)
-        except KeyError:
-            return False

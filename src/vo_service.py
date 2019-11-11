@@ -13,10 +13,6 @@ class MicroCurrencyConverterVOServiceImpl(MicroCurrencyConverterVOService):
     ):
         if not amount:
             raise exceptions.AmountMustBePositiveInteger()
-        if not self._prices_services.is_date_indexed(reference_date):
-            raise exceptions.ReferenceDateOutOfRange(
-                'Date must a working day be between %s and %s' % self._prices_services.get_range()
-            )
         if src_currency == dest_currency:
             raise exceptions.InvalidCurrencyPair(
                 '%s %s is not a currency pair' % (src_currency, dest_currency)
