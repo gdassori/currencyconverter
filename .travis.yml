@@ -1,0 +1,17 @@
+language: python
+os:
+  - linux
+dist:
+  - xenial
+python:
+  - 3.6.3
+before_install:
+  - pwd
+  - pip install -r requirements.txt
+script:
+  - coverage run --source=src -m unittest discover tests
+after_success:
+  - coverage report
+  - pip install python-coveralls
+  - coveralls
+
