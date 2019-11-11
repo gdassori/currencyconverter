@@ -1,6 +1,9 @@
 # Micro Currency Converter
 An easy to use currency converter, uses ECB data as source, able to convert from\to EUR.
 
+
+
+![Build Status](https://travis-ci.org/gdassori/currencyconverter.svg?branch=master)
 #### Installation
 
 Requires docker:
