@@ -8,9 +8,7 @@ class MicroCurrencyConverterVOServiceImpl(MicroCurrencyConverterVOService):
     def __init__(self, prices_service: PricesService):
         self._prices_services = prices_service
 
-    async def get_price_for_pair(
-            self, amount: decimal.Decimal, reference_date: str, src_currency: str, dest_currency: str
-    ):
+    async def get_price_for_pair(self, amount: str, reference_date: str, src_currency: str, dest_currency: str):
         if not amount:
             raise exceptions.AmountMustBePositiveInteger()
         if src_currency == dest_currency:

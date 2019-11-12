@@ -18,7 +18,7 @@ vo_service = MicroCurrencyConverterVOServiceImpl(prices_service)
     dest_currency=CurrencyCombinator,
     reference_date=ReferenceDateCombinator
 )
-async def hello(request):
+async def convert(request):
     response = await vo_service.get_price_for_pair(
         request.query['amount'],
         request.query['reference_date'],

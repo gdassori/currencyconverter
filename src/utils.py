@@ -2,6 +2,7 @@ import functools
 
 from aiohttp.web_exceptions import HTTPBadRequest
 
+from src import Logger
 from src.exceptions import MicroCurrencyConverterException
 
 
@@ -11,5 +12,6 @@ def catch_exceptions(fun):
         try:
             return await fun(request)
         except MicroCurrencyConverterException as e:
-            raise HTTPBadRequest(body=e.args and e.args[0] or str(e))
+            Logger.debug('Exception handled')
+            raise HTTPBadRequest(reason=e.args and e.args[0] or str(e))
     return wrapper

@@ -40,6 +40,9 @@ class TestPriceService(TestCase):
         with self.assertRaises(exceptions.ReferenceDateOutOfRange):
             self.sut.get_quotes_for_date('2020-10-10')
         self.assertTrue(self.sut.get_quotes_for_date('2019-11-11'))
+        self.assertFalse(self.sut.is_currency_supported('NIL'))
+        self.assertTrue(self.sut.is_currency_supported('USD'))
+        self.assertTrue(self.sut.is_currency_supported('EUR'))
 
     def test(self):
         self.loop.run_until_complete(self.async_test())

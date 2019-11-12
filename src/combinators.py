@@ -7,7 +7,7 @@ from pycomb.exceptions import PyCombValidationError
 from src import exceptions
 
 
-def is_amount(amount):
+def is_amount(amount: str):
     try:
         return bool(float(amount))
     except ValueError:
