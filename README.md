@@ -4,7 +4,7 @@ An easy to use currency converter, uses ECB data as source, able to convert from
 
 
 ![Build Status](https://travis-ci.org/gdassori/currencyconverter.svg?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/gdassori/currencyconverter/badge.svg?branch=master)](https://coveralls.io/github/<github username>/<repo name>?branch=master)
+![Coverage Status](https://coveralls.io/repos/github/gdassori/currencyconverter/badge.svg?branch=master)
 
 #### Installation
 
