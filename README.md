@@ -4,14 +4,24 @@ An easy to use currency converter, uses ECB data as source, able to convert from
 
 
 ![Build Status](https://travis-ci.org/gdassori/currencyconverter.svg?branch=master)
-#### Installation
+[![Coverage Status](https://coveralls.io/repos/github/gdassori/currencyconverter/badge.svg?branch=master)](https://coveralls.io/github/<github username>/<repo name>?branch=master)
 
-Requires docker:
+#### Installation
 
 Available on DockerHub:
 ```bash
 docker pull gdassori/mcc:latest
 docker run -t -p=8080:8080 gdassori/mcc
+```
+
+Or can be executed from sources, requires Python >= 3.6 and pip. Virtualenv is optional.
+```bash
+git clone https://github.com/gdassori/currencyconverter.git
+cd currencyconverter
+virtualenv -p python3.6 venv  # optional
+. venv/bin/activate  # optional
+pip install -r requirements.txt
+python -m src.app
 ```
 
 #### Usage example
@@ -36,4 +46,3 @@ would return:
 ```bash
 {"amount": "11.03", "currency": "USD"}
 ```
-
