@@ -109,6 +109,9 @@ class TestPriceService(TestCase):
         payload['dest_currency'] = 'EURR'
         response = await self.get(payload)
         self.assertEqual(response, '400: Argument dest_currency with invalid value: EURR')
+        payload['amount'] = -1
+        response = await self.get(payload)
+        self.assertEqual(response, '400: Argument amount with invalid value: -1')
         self.done = True
         self.validations_executed = True
 

@@ -6,10 +6,6 @@ class CurrencyNotSupportedException(MicroCurrencyConverterException):
     pass
 
 
-class AmountMustBePositiveInteger(MicroCurrencyConverterException):
-    pass
-
-
 class ReferenceDateOutOfRange(MicroCurrencyConverterException):
     pass
 

@@ -24,5 +24,7 @@ class PricesService(metaclass=abc.ABCMeta):
 class MicroCurrencyConverterVOService(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
-    def get_price_for_pair(self, amount: str, reference_date: str, src_currency: str, dest_currency: str):
+    def get_price_for_pair(
+            self, amount: str, reference_date: str, src_currency: str, dest_currency: str
+    ) -> typing.Dict:
         pass  # pragma: no cover

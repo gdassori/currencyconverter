@@ -9,7 +9,7 @@ from src import exceptions
 
 def is_amount(amount: str):
     try:
-        return bool(float(amount))
+        return bool(float(amount) > 0)
     except ValueError:
         return
 
